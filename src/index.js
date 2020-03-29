@@ -1,6 +1,6 @@
 const Telegraf = require('telegraf');
 
-const BOT_TOKEN = process.env.BOT_TOKEN || "861074090:AAGwj5x6Hto9q1izTW-n_1O_rrTUToL6BDc";
+const BOT_TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT || 3000;
 const URL = process.env.URL || "https://estimation-poll-bot.herokuapp.com/";
 
