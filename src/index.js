@@ -11,6 +11,10 @@ app.use(
     })
 );
 
+app.get('/', (req, res) => {
+    res.send('Estimation Poll Bot is working!');
+});
+
 //This is the route the API will call
 app.post('/new-message', (req, res) => {
     const {message} = req.body;
