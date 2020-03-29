@@ -13,7 +13,10 @@ bot.command('newestimate', (ctx) => ctx.reply('Here will be a poll.'));
 
 bot.telegram.setWebhook(`${URL}/bot`)
     .then(() => {
-        bot.startWebhook(`/bot`, null, PORT);
+        bot.startWebhook('/bot', null, PORT);
+        return bot.launch();
+    })
+    .then(() =>{
         console.log('Estimation Poll Bot is started!');
     });
 
