@@ -1,55 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const Telegraf = require('telegraf');
 
-const app = express();
+const BOT_TOKEN = process.env.BOT_TOKEN || "861074090:AAGwj5x6Hto9q1izTW-n_1O_rrTUToL6BDc";
+const PORT = process.env.PORT || 3000;
+const URL = process.env.URL || "https://estimation-poll-bot.herokuapp.com/";
 
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
+const bot = new Telegraf(BOT_TOKEN);
 
-app.get('/', (req, res) => {
-    res.send('Estimation Poll Bot is working!');
-});
+bot.command('newestimate', (ctx) => ctx.reply('Here will be a poll.'));
 
-app.post('/new-message', (req, res) => {
-    const {message} = req.body;
+bot.telegram.setWebhook(`${URL}/bot`)
+    .then(() => {
+        bot.startWebhook(`/bot`, null, PORT);
+        console.log('Estimation Poll Bot is started!');
+    });
 
-    if (!message || message.text.toLowerCase().indexOf('marco') < 0) {
-        return res.end()
-    }
-
-    axios
-        .post(
-            'https://api.telegram.org/bot861074090:AAGwj5x6Hto9q1izTW-n_1O_rrTUToL6BDc/sendPoll',
-            {
-                chat_id: message.chat.id,
-                is_anonymous: false,
-                question: 'Estimation',
-                options: [
-                    '1 story point',
-                    '2 story points',
-                    '3 story points',
-                    '5 story points',
-                    '8 story points',
-                    '13 story points',
-                    '21 story points',
-                ]
-            }
-        )
-        .then(() => {
-            console.log('Poll posted');
-            res.end('ok')
-        })
-        .catch(err => {
-            console.log('Error: ', err);
-            res.end('Error: ' + err)
-        })
-});
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Estimation Poll Bot is started on port 3000!')
-});
+// axios
+//     .post(
+//         'https://api.telegram.org/bot861074090:AAGwj5x6Hto9q1izTW-n_1O_rrTUToL6BDc/sendPoll',
+//         {
+//             chat_id: message.chat.id,
+//             is_anonymous: false,
+//             question: 'Estimation',
+//             options: [
+//                 '1 story point',
+//                 '2 story points',
+//                 '3 story points',
+//                 '5 story points',
+//                 '8 story points',
+//                 '13 story points',
+//                 '21 story points',
+//             ]
+//         }
+//     )
+//     .then(() => {
+//         console.log('Poll posted');
+//         res.end('ok')
+//     })
+//     .catch(err => {
+//         console.log('Error: ', err);
+//         res.end('Error: ' + err)
+//     })
