@@ -27,6 +27,7 @@ app.post('/new-message', (req, res) => {
             'https://api.telegram.org/bot861074090:AAGwj5x6Hto9q1izTW-n_1O_rrTUToL6BDc/sendPoll',
             {
                 chat_id: message.chat.id,
+                is_anonymous: false,
                 question: 'Estimation',
                 options: [
                     '1 story point',
