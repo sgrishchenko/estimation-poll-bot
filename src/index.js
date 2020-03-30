@@ -1,4 +1,4 @@
-const Telegraf = require('telegraf');
+import Telegraf from 'telegraf';
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT || 3000;
