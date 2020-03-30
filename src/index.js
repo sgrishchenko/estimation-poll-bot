@@ -2,7 +2,7 @@ import Telegraf from 'telegraf';
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT || 3000;
-const URL = process.env.URL || "https://estimation-poll-bot.herokuapp.com/";
+const URL = process.env.URL || 'https://estimation-poll-bot.herokuapp.com/';
 
 const bot = new Telegraf(BOT_TOKEN);
 
